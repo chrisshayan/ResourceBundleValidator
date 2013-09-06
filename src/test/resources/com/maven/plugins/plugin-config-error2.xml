@@ -1,0 +1,68 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.maven.plugins</groupId>
+    <artifactId>ResourceBundleValidatorUnitTest</artifactId>
+    <packaging>jar</packaging>
+    <version>1.1-SNAPSHOT</version>
+    <name>ResourceBundleValidator Maven Mojo Unit Testing</name>
+    <developers>
+        <developer>
+            <name>Chris Shayan</name>
+            <url>http://www.ChrisShayan.com</url>
+            <email>info@ChrisShayan.com</email>
+        </developer>
+    </developers>
+    <dependencies>
+        <!-- Test libs -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Test libs -->
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>ResourceBundleValidator</artifactId>
+                <configuration>
+                    <resourceBundleDirectory>${basedir}/src/test/resources/missingkey</resourceBundleDirectory>
+                    <resourceBundleGroups>
+                        <property>
+                            <name>labels</name>
+                            <value>label1,label2</value>
+                        </property>
+                    </resourceBundleGroups>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>validateBundlesGoal</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <repositories>
+        <repository>
+            <id>seb-nexus</id>
+            <name>SEB Nexus</name>
+            <url>http://172.25.43.3:8080/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>
+    <distributionManagement>
+        <repository>
+            <id>seb-nexus</id>
+            <name>TLX SEB Release</name>
+            <url>http://172.25.43.3:8080/nexus/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>seb-nexus</id>
+            <name>TLX SEB SNAPSHOT</name>
+            <url>http://172.25.43.3:8080/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+</project>
